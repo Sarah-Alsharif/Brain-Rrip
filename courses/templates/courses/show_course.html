@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+        <!-- Page Content-->
+        <div class="container">
+            <!-- Heading Row-->
+            <div class="row align-items-center my-5">
+                <div class="col-lg-7"><img class="img-fluid mb-4 mb-lg-0" src="{{one_course.photo_url}}"  alt="..." /></div>
+                <div class="col-lg-5">
+                    <h1 class="font-weight-light">{{one_course.name}} </h1>
+                    <h6 class="mt-2 fw-bolder">Description:</h6>
+                    <p>{{one_course.description}}</p>
+                    <h6 class="fw-bolder">Instructor:</h6>
+                     <p>{{one_course.owner.profile.fullName}}</p>
+                </div>
+            </div>
+            <!-- Call to Action-->
+            {% if user.profile.user_type == 'Instructor' %}
+            <div class="card text-white my-5 py-1 text-center" style="background-color:#cfd2d530">
+                <div class="card-body">
+
+                 <a  href="{% url 'addLesson' pk=one_course.id %}" type="button" class="btn btn-outline-primary"> Add Lesson
+                 <i class="fas fa-plus"></i></a>
+                 <a href="{% url 'updateCourse' pk=one_course.id%}" type="button" class="btn btn-outline-success"> Update
+                 <i class="fas fa-pen"></i></a>
+                 <a  href="{% url 'deleteCourse' pk=one_course.id %}" type="button" class="btn btn-outline-danger"> Delete
+                 <i class="fas fa-trash"></i></a>
+               
+                </div>
+            </div>
+            {%endif%}
+
+            <div style="display: none" class="alert alert-danger " role="alert" id="x-msg">
+                <h4 class="alert-heading text-center message">
+                You need to register in the course to see the rest of the lessons.
+                </h4>
+            </div>
+
+
+
+            <!-- Content Row-->
+            <div class="row">
+
+                 <!--if the user register in course-->
+                 {% if user in one_course.registerd_users.all or user.profile.user_type == 'Instructor'%} 
+                 {% for lesson in one_course.lessons.all %}
+                <div class="col-md-4 mb-5">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4 class="card-title text-center"> {{lesson.title}} </h4>
+                        </div>
+                        <div class="card-footer text-center"><a class="btn btn-primary btn-sm" href="{% url 'showLesson' pk=lesson.id %}">Go to the lesson</a></div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                <!--if the user not register , show only first lesson details-->
+                {% else%}
+
+                {% for lesson in one_course.lessons.all %}
+                {% if lesson == one_course.lessons.first %}
+                <div class="col-md-4 mb-5">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4 class="card-title text-center"> {{lesson.title}} </h4>
+                        </div>
+                        <div class="card-footer text-center"><a class="btn btn-primary btn-sm" href="{% url 'showLesson' pk=one_course.lessons.first.id %}">Go to the lesson</a></div>
+                    </div>
+                </div>
+
+                {% else %}
+                <div class="col-md-4 mb-5">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4 class="card-title text-center"> {{lesson.title}} </h4>
+                        </div>
+                        <div class="card-footer text-center"><a class="btn btn-primary btn-sm" href="" onclick="printMSG()">Go to the lesson</a></div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %} 
+            
+                {%endif%}
+
+
+            </div>
+
+
+            {%if user.profile.user_type == 'Student' or not user.is_authenticated%}
+            {% if not user in one_course.registerd_users.all %}
+             <div class="d-flex justify-content-center">
+            <a href="{% url 'courseRegister' pk=one_course.id%}">
+             <button type="submit" class="btn my-4 h-15 fw-bolder" style="background:#fcb229; font-size:17px; width:200px">Register</button></a>
+              </div>
+            {% endif%}
+           {% endif%}
+        </div>
+
+
+
+        <script>
+            function printMSG(){
+            document.getElementById("x-msg").style.display = "block";
+            setTimeout(()=>{  
+                document.querySelector('#x-msg').remove()
+                location.href = "{% url 'showCourse' pk=one_course.id%}"
+                } ,3000)
+             }
+            </script>
+
+
+
+
+
+
+
+{% endblock  %}
+ 

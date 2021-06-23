@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags%}
+
+<div class="container">
+  <div class="row content">
+<div class=" col-12 mx-auto col-md-6 mb-3">
+      <img src="{%static "images/addlesson.jpeg"%}" class="img-fluid" alt="">
+</div>
+<div class=" col-12 mx-auto col-md-6 mt-md-4">
+<form action="" method="POST" style="background:white"  >
+<h3 class="text-center">Add New Lesson</h3>
+ {% csrf_token %}
+ {{form | crispy}}
+<div class="d-flex justify-content-center">
+<button type="submit" class="btn my-4 w-25 h-15" style="background:#fcb229">Add</button>
+</div>
+</form>
+</div>
+  </div>
+</div>
+{% endblock  %}

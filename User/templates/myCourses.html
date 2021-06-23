@@ -1,0 +1,94 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container ">
+  <div class="main-body">
+    <nav aria-label="breadcrumb" class="main-breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'profile' %}">My profile</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'mycourses' %}">My courses</a>
+        </li>
+      </ol>
+    </nav>
+    <div class="row pb-5 bg-white shadow">
+      {% if user.profile.user_type == 'Student' %} 
+      {% if request.user.mycourses.all|length > 0 %} 
+      {% for course in request.user.mycourses.all %}
+
+      <div
+        class="
+          col-12
+          mx-auto
+          col-sm-6 col-lg-4
+          mt-5
+          d-flex
+          justify-content-center
+        "
+      >
+        <div class="card course-card" style="width: 18rem">
+          <img
+            src="{{course.photo_url}}"
+            class="card-img-top w-100 h-100"
+            alt="..."
+          />
+          <div class="card-body">
+            <p class="card-text">{{course.name}}</p>
+            <a
+              href="{% url 'showCourse' pk=course.id %}"
+              class="btn btn-primary"
+              >Preview</a
+            >
+          </div>
+        </div>
+      </div>
+
+      {% endfor %} 
+      {% else %}
+      <p>You're not registered in any courses.</p>
+
+      {% endif %} 
+
+      {% elif user.profile.user_type == 'Instructor' %} 
+
+      {% if request.user.courses.all|length > 0 %} 
+      {% for course in request.user.courses.all %}
+       <div
+        class="
+          col-12
+          mx-auto
+          col-sm-6 col-lg-4
+          mt-5
+          d-flex
+          justify-content-center
+        "
+      >
+        <div class="card course-card" style="width: 18rem">
+          <img
+            src="{{course.photo_url}}"
+            class="card-img-top w-100 h-100"
+            alt="..."
+          />
+          <div class="card-body">
+            <p class="card-text">{{course.name}}</p>
+            <a
+              href="{% url 'showCourse' pk=course.id %}"
+              class="btn btn-primary"
+              >Preview</a
+            >
+          </div>
+        </div>
+      </div>
+
+      {% endfor%}
+
+      {% else %}
+       <p>You haven't added any courses yet.</p>
+      {% endif %}
+
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

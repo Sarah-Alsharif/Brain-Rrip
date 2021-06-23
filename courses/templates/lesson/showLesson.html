@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container shadow my-4 pb-4" style="border: 1px solid gray; background-color:white">
+<h1 class="text-center mt-4">{{one_lesson.title}} </h1>
+<div class="row mt-4 w-sm-75 mx-auto d-flex justify-content-center">
+<div class="col-12 d-flex justify-content-center col-sm-5">
+
+</div><!--end col 1-->
+<iframe width="700" height="500" src="{{ one_lesson.video }}">
+</iframe>
+</div> 
+<div class="col-12 col-sm-6 mt-5 ">
+<h6 class="mt-2 fw-bolder">Description:</h6>
+<p  class="ml-5" style="text-align: justify; text-justify: inter-word;">{{one_lesson.description}} </p>
+
+{% if user.profile.user_type == 'Instructor' %}
+<div>
+<a href="{% url 'updateLesson' pk=one_lesson.id%}" type="button" class="btn btn-outline-success"> Update Lesson
+<i class="fas fa-pen"></i></a>
+
+<a href="{% url 'deleteLesson' pk=one_lesson.id %}" type="button" class="btn btn-outline-danger"> Delete
+<i class="fas fa-pen"></i></a>
+</div>
+{%endif%}
+</div><!--end col 2-->
+
+
+</div><!--end row 1-->
+
+
+</div>
+
+</div>
+
+{% endblock  %}

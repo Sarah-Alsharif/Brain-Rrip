@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" type="image/png" href="https://images.vexels.com/media/users/3/157346/isolated/preview/25829f6b8d6ca72aee817a8448ab7024-flat-open-book-icon-by-vexels.png"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brain Trip</title>
+  <!-- CSS only -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
+    <!--font awesome-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==""
+    crossorigin="anonymous"/>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+    crossorigin="anonymous"></script>
+ 
+<!--Google Font-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+<link rel="stylesheet" href="{% static 'css/home.css' %}" />
+
+<!--  <link rel="stylesheet" href="{% static 'css/profile.css' %}">-->
+
+
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #22577A;">
+    <div class="container">
+   
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+           <a class="navbar-brand" href="#" style=" color:#22577A ;">
+
+        <img src ="{%static "images/logo3.png"%}" width"50px" height="50px" alt="">
+      </a>
+
+      <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+          <div></div>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a style="color:#fff ;" class="nav-link active " aria-current="page" href="{% url 'home' %}">Home</a>
+          </li>
+          {% if user.profile.user_type == 'Student' or not user.is_authenticated %} 
+          <li class="nav-item">
+            <a style="color:#fff ;" class="nav-link" href="{% url 'allCourses' %}">Courses</a>
+          </li>
+          {%endif%}
+      
+          <li class="nav-item">
+            <a style="color:#fff ;" class="nav-link"  href="{% url 'instructors' %}">Instructors</a>
+          </li>
+
+            {% if user.profile.user_type == 'Instructor'%}
+            <li class="nav-item">
+            <a style="color:#fff ;" class="nav-link"  href="{% url 'addCourse' %}">Add Course</a>
+          </li>
+          {%endif%}
+
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a style="color:#fff ;" class="nav-link"  href="{% url 'profile' %}">My Account</a>
+          </li>
+          {% endif%}
+
+        </ul>
+
+        <div class="d-flex align-items-center">
+          <!-- check if user is login  -->
+          {% if not user.is_authenticated %}
+            <a href="{% url 'login' %}"  class="btn btn-outline-light m-2">Login</a>
+            <a href="{% url 'signup' %}" class="btn btn-outline-light"> Sign up</a>
+            {% else %}
+            <a href="{% url 'logout' %}"  class="btn btn-outline-light"> Logout</a>
+            {% endif%}
+        </div>
+
+      </div>
+
+    </div>
+  </nav>
+  {% if messages %}
+
+  {% for message in messages %}
+  
+  <div class="alert alert-{{message.tags}} django-msg" role="alert">
+    <h4 class="alert-heading text-center message">
+    {{message}}
+  
+    </h4>
+  </div>
+  {% endfor %}
+
+
+  {%endif %}
+
+  <main style="min-height: calc( 100vh - (70px + 67px) );">
+
+    {% block content%}
+    {% endblock %}
+  </main>
+<footer class="footer_area section_padding_130_0">
+      <div class="container">
+        <div class="row">
+          <!-- Single Widget-->
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="single-footer-widget section_padding_0_130">
+              <!-- Footer Logo-->
+              <div class="footer-logo mb-3"></div>
+              <!-- Footer Social Area-->
+              <div class="footer_social_area"><a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a><a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Pinterest"><i class="fa fa-pinterest"></i></a><a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Skype"><i class="fa fa-skype"></i></a><a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></div>
+            </div>
+          </div>
+          <!-- Single Widget-->
+          <div class="col-12 col-sm-6 col-lg">
+            <div class="single-footer-widget section_padding_0_130">
+              <!-- Widget Title-->
+              <h5 class="widget-title">About</h5>
+              <!-- Footer Menu-->
+              <div class="footer_menu">
+                <ul>
+                  <li><a href="#">About Us</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- Single Widget-->
+          <div class="col-12 col-sm-6 col-lg">
+            <div class="single-footer-widget section_padding_0_130">
+              <!-- Widget Title-->
+              <h5 class="widget-title">Support</h5>
+              <!-- Footer Menu-->
+              <div class="footer_menu">
+                <ul>
+                  <li><a href="#">Help</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- Single Widget-->
+          <div class="col-12 col-sm-6 col-lg">
+            <div class="single-footer-widget section_padding_0_130">
+              <!-- Widget Title-->
+              <h5 class="widget-title">Contact</h5>
+              <!-- Footer Menu-->
+              <div class="footer_menu">
+                <ul>
+                  <li><a href="#">Call Centre</a></li>
+                  <li><a href="#">Email Us</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+</body>
+</html>
+<script>
+  setTimeout(()=>document.querySelector('.django-msg').remove() ,3000)
+</script>

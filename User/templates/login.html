@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags%}
+
+
+<div class="container">
+  <div class="row content">
+    <div class=" col-12 mx-auto col-md-6 mb-3">
+      <img src="{%static "images/login2.png"%}" class="img-fluid" alt="">
+    </div>
+
+    <div class=" col-12 mx-auto col-md-6 mt-md-4">
+    <h3 class="signin-text mb-3 text-center">Sign in</h3>
+    <form action=""  method="POST">
+      {% csrf_token %}
+      {{form | crispy}}
+       <!--{{form.username.label}}
+       {{form.username}}-->
+      <h6 class="my-3"><a href="{% url 'password_reset' %}">Forget Your Password?</a></h6>
+      <h6 class="mb-3 my-3">New User? <a href="{%url 'signup'%}">Create New Account</a></h6>
+        <div class="d-flex justify-content-center">
+      <button type="submit" class="btn my-4 w-25 h-15" style="background:#fcb229">Login</button>
+     </div>
+    </form>
+  </div>
+  </div>
+</div>
+
+{% endblock  %}
