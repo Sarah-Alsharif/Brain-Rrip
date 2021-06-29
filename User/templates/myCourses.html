@@ -27,21 +27,13 @@
           justify-content-center
         "
       >
-        <div class="card course-card" style="width: 18rem">
-          <img
-            src="{{course.photo_url}}"
-            class="card-img-top w-100 h-100"
-            alt="..."
-          />
-          <div class="card-body">
-            <p class="card-text">{{course.name}}</p>
-            <a
-              href="{% url 'showCourse' pk=course.id %}"
-              class="btn btn-primary"
-              >Preview</a
-            >
-          </div>
+      <div class="card" style="width: 18rem;">
+        <img src="{{course.photo_url}}" class="card-img-top card-size" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{course.name}}</h5>
+          <a href="{% url 'showCourse' pk=course.id %}" class="btn btn-primary">Preview</a>
         </div>
+      </div>
       </div>
 
       {% endfor %} 
@@ -64,21 +56,13 @@
           justify-content-center
         "
       >
-        <div class="card course-card" style="width: 18rem">
-          <img
-            src="{{course.photo_url}}"
-            class="card-img-top w-100 h-100"
-            alt="..."
-          />
-          <div class="card-body">
-            <p class="card-text">{{course.name}}</p>
-            <a
-              href="{% url 'showCourse' pk=course.id %}"
-              class="btn btn-primary"
-              >Preview</a
-            >
-          </div>
+      <div class="card" style="width: 18rem;">
+        <img src="{{course.photo_url}}" class="card-img-top card-size" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{course.name}}</h5>
+          <a href="{% url 'showCourse' pk=course.id %}" class="btn btn-primary">Preview</a>
         </div>
+      </div>
       </div>
 
       {% endfor%}

@@ -10,7 +10,7 @@ choices = (
     )
 
 class Profile(models.Model):
-    image = models.ImageField(upload_to ="img/" , null=True)
+    image = models.ImageField(upload_to ="img/" ,  null=True)
     fullName = models.CharField( max_length=150, null=True)
     bio =models.CharField( max_length=300, null=True)
     user = models.OneToOneField(User , related_name="profile" , on_delete=models.CASCADE)

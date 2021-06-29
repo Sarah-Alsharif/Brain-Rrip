@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.http import JsonResponse
-from .models import Courses, Lessons
+from .models import Courses, Lessons 
 from .forms import CourseForm, LessonForm
 from django.contrib.auth.models import User
 from django.template import RequestContext
@@ -74,7 +74,9 @@ def update_Course(request, pk):
 
 def instructors(request):
 
-    return render(request, 'instructor/instructors.html')
+    all_instructors = User.objects.all()
+    return render(request, 'instructor/instructors.html' , {"all_instructors" : all_instructors})
+
 
 
 # add delete course

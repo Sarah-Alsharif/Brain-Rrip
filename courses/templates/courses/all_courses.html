@@ -40,30 +40,26 @@
 
   {% for course in courses %}
    <div
-      class="col-12 mx-auto col-sm-6 col-lg-4 mt-5 d-flex justify-content-center"
+      class="col-12 mx-auto col-sm-6 col-lg-4 mt-5 d-flex justify-content-center";
     >
-      <div class="card course-card" style="width: 18rem">
-        <img
-          src="{{course.photo_url}}"
-          class="card-img-top w-100 h-100"
-          alt="..."
-        />
-        <div class="card-body">
-          <div class="card-title d-flex">
-            <img
-              src="/{{course.owner.profile.image}}"
-              alt=""
-              style="width: 35px; height:35px; border-radius: 35px;"
-              class="me-2"
-            />
-            <h5 class="mt-1">{{course.owner.profile.fullName}}</h5>
-          </div>
-          <p class="card-text">{{course.name}}</p>
-          <a href="{% url 'showCourse' pk=course.id %}" class="btn btn-primary"
-            >Preview</a
-          >
+    <div class="card" style="width: 18rem;">
+      <img src="{{course.photo_url}}" class="card-img-top card-size" alt="...">
+      <div class="card-body">
+        <div class="card-title d-flex">
+          <img
+            src="/{{course.owner.profile.image}}"
+            alt=""
+            style="width: 35px; height:35px; border-radius: 35px;"
+            class="me-2"
+          />
+          <h5 class="mt-1">{{course.owner.profile.fullName}}</h5>
         </div>
+        <p class="card-text">{{course.name}}</p>
+        <a href="{% url 'showCourse' pk=course.id %}" class="btn btn-primary"
+        >Preview</a>   
       </div>
+    </div>
+
     </div>
   
   {% endfor %}
@@ -72,30 +68,25 @@
     <!--col 1-->
     {% for course in all_Courses %}
     <div
-      class="col-12 mx-auto col-sm-6 col-lg-4 mt-5 d-flex justify-content-center"
+      class="col-12 mx-auto col-sm-6 col-lg-4 mt-5 d-flex justify-content-center";
     >
-      <div class="card course-card" style="width: 18rem">
-        <img
-          src="{{course.photo_url}}"
-          class="card-img-top w-100 h-100"
-          alt="..."
-        />
-        <div class="card-body">
-          <div class="card-title d-flex">
-            <img
-              src="/{{course.owner.profile.image}}"
-              alt=""
-              style="width: 35px; height:35px; border-radius: 35px;"
-              class="me-2"
-            />
-            <h5 class="mt-1">{{course.owner.profile.fullName}}</h5>
-          </div>
-          <p class="card-text">{{course.name}}</p>
-          <a href="{% url 'showCourse' pk=course.id %}" class="btn btn-primary"
-            >Preview</a
-          >
+    <div class="card" style="width: 18rem;">
+      <img src="{{course.photo_url}}" class="card-img-top card-size" alt="...">
+      <div class="card-body">
+        <div class="card-title d-flex">
+          <img
+            src="/{{course.owner.profile.image}}"
+            alt=""
+            style="width: 35px; height:35px; border-radius: 35px;"
+            class="me-2"
+          />
+          <h5 class="mt-1">{{course.owner.profile.fullName}}</h5>
         </div>
+        <p class="card-text">{{course.name}}</p>
+        <a href="{% url 'showCourse' pk=course.id %}" class="btn btn-primary"
+        >Preview</a>   
       </div>
+    </div>
     </div>
     <!--end col 1-->
     {% endfor %}

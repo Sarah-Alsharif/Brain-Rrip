@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+import django_heroku
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'django_courses.urls'
@@ -79,6 +81,7 @@ WSGI_APPLICATION = 'django_courses.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -88,6 +91,22 @@ DATABASES = {
         'HOST': 'localhost'
     }
 }
+"""
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd20sn0n3ofdf78',
+        'USER': 'tzfxcruyakccrl',
+        'PASSWORD': 'e0f61c170ddfa73a32aa634a4f5652f3bf573277298fd273c0a066c11a451235',
+        'HOST': 'ec2-3-214-136-47.compute-1.amazonaws.com',
+        'PORT': 5432
+    }
+}
+
+# postgres://
+#tzfxcruyakccrl:e0f61c170ddfa73a32aa634a4f5652f3bf573277298fd273c0a066c11a451235
+#@ec2-3-214-136-47.compute-1.amazonaws.com:5432/d20sn0n3ofdf78
 
 
 # Password validation
@@ -126,8 +145,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+    
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static')),
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -149,4 +173,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'braintrip8@gmail.com'
-EMAIL_HOST_PASSWORD = 'braintrip15.'
+EMAIL_HOST_PASSWORD = 'braintrip15@'
+
+django_heroku.settings(locals())
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

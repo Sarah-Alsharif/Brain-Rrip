@@ -1,4 +1,8 @@
 ![wirefram](courses/static/images/wireframe/GA.png)
+
+## Link to the website:
+https://brain-trip-pi.herokuapp.com
+
 ## What is the story behind this Online Courses Website?
 A web app for online courses. Users can sign up as teachers or students. It allows teachers to add courses with video or text lessons for each course. Students are able to browse through courses and register to as many as they like. They will be able to read or watch lessons.
 
